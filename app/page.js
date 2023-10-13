@@ -119,7 +119,7 @@ export default  function Home() {
         </div>
 
         <div className='flex flex-col space-y-4 mb-6'>
-          <h3 className='font-bold text-2xl text-black leading-relaxed'>Prix d'exercice</h3>
+          <h3 className='font-bold text-2xl text-black leading-relaxed'>Strike</h3>
           <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
           <input type="number" value={strike} placeholder="$ 10.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{

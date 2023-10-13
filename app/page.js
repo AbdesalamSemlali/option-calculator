@@ -108,7 +108,7 @@ export default  function Home() {
         </div>
 
         <div className='flex flex-col space-y-4 mb-6'>
-          <h3 className='font-bold text-2xl text-black leading-relaxed'>Prix du sous jacent</h3>
+          <h3 className='font-bold text-2xl text-black leading-relaxed'>Price of the underlying</h3>
           <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
           <input type="number" value={underlying}  placeholder="$ 145.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
@@ -132,7 +132,7 @@ export default  function Home() {
 
       <div className="flex flex-col w-[40%]">
         <div className='flex flex-col space-y-4 mb-6'>
-          <h3 className='font-bold text-2xl text-black leading-relaxed'>Taux d'intérêt</h3>
+          <h3 className='font-bold text-2xl text-black leading-relaxed'>Interest Rate</h3>
           <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
           <input type="number" value={interest} placeholder="% 5.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
@@ -143,7 +143,7 @@ export default  function Home() {
         </div>
 
         <div className='flex flex-col space-y-4 mb-6'>
-          <h3 className='font-bold text-2xl text-black leading-relaxed'>Volatilité</h3>
+          <h3 className='font-bold text-2xl text-black leading-relaxed'>Volatility</h3>
           <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
           <input type="number" value={volatility} placeholder="% 3.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500 rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
@@ -154,7 +154,7 @@ export default  function Home() {
         </div>
 
         <div className='flex flex-col space-y-4 mb-6'>
-          <h3 className='font-bold text-2xl text-black leading-relaxed'>Maturité</h3>
+          <h3 className='font-bold text-2xl text-black leading-relaxed'>Maturity</h3>
           <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
           <input type="date" value={maturity} className="px-4 py-5 h-[58px] rounded-lg text-zinc-500 border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
@@ -166,7 +166,7 @@ export default  function Home() {
         {
           (model === "Binomial" || model === "Trinomial") ? (
             <div className='flex flex-col space-y-4 mb-6'>
-              <h3 className='font-bold text-2xl text-black leading-relaxed'>Nombre de Période</h3>
+              <h3 className='font-bold text-2xl text-black leading-relaxed'>Period Numbers</h3>
               <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
               <input
                 type="number"

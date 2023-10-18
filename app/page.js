@@ -6,6 +6,7 @@ export default  function Home() {
   const [price, setPrice] = useState(null);
   const  [model,setModel] = useState("Binomial")
   const [option,setOption] = useState("Call")
+  const [optionType,setOptionType] = useState("Euro")
   const [underlying, setUnderlying] = useState("")
   const [strike, setStrike] = useState("")
   const [interest, setInterest] = useState("")
@@ -24,6 +25,7 @@ export default  function Home() {
         body: JSON.stringify({
           model,
           option,
+          optionType,
           underlying,
           strike,
           interest,
@@ -87,16 +89,16 @@ export default  function Home() {
 
         <div className='flex flex-col space-y-4 mb-6'>
           <h3 className='font-bold text-2xl text-black leading-relaxed'>Option Type</h3>
-          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the option type </div>
           <div className='flex'>
-            <div className={`w-1/2 h-[58px] px-[38px] py-5 ${option === "Call" ? "bg-zinc-800 rounded-lg  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"} flex justify-center items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
+            <div className={`w-1/2 h-[35px] px-[38px] py-5 ${option === "Call" ? "bg-zinc-800 rounded-lg  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"} flex justify-center items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
             onClick={(e)=>{
                 setOption(e.target.innerText)
             }}
             >
               Call
             </div>
-            <div className={`w-1/2 h-[58px] px-[38px] py-5 ${option === "Put" ? "bg-zinc-800 rounded-lg  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"}  flex justify-center items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
+            <div className={`w-1/2 h-[35px] px-[38px] py-5 ${option === "Put" ? "bg-zinc-800 rounded-lg  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"}  flex justify-center items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
             onClick={(e)=>{
                 setOption(e.target.innerText)
             }}
@@ -104,12 +106,28 @@ export default  function Home() {
               Put
             </div>
           </div>
+          <div className='flex'>
+            <div className={`w-1/2 h-[35px] px-[38px] py-5 ${optionType === "Euro" ? "bg-zinc-800 rounded-lg  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"} flex justify-center items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
+            onClick={(e)=>{
+                setOptionType(e.target.innerText)
+            }}
+            >
+              Euro
+            </div>
+            <div className={`w-1/2 h-[35px] px-[38px] py-5 ${optionType === "Americain" ? "bg-zinc-800 rounded-lg  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"}  flex justify-center items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
+            onClick={(e)=>{
+                setOptionType(e.target.innerText)
+            }}
+            >
+              Americain
+            </div>
+          </div>
           <div className="border-b-2 w-full  bg-[#E4E4E7] "></div>
         </div>
 
         <div className='flex flex-col space-y-4 mb-6'>
           <h3 className='font-bold text-2xl text-black leading-relaxed'>Price of the underlying</h3>
-          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the price</div>
           <input type="number" value={underlying}  placeholder="$ 145.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
               setUnderlying(e.target.value)
@@ -120,7 +138,7 @@ export default  function Home() {
 
         <div className='flex flex-col space-y-4 mb-6'>
           <h3 className='font-bold text-2xl text-black leading-relaxed'>Strike</h3>
-          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the strike of the option</div>
           <input type="number" value={strike} placeholder="$ 10.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
               setStrike(e.target.value)
@@ -133,7 +151,7 @@ export default  function Home() {
       <div className="flex flex-col w-[40%]">
         <div className='flex flex-col space-y-4 mb-6'>
           <h3 className='font-bold text-2xl text-black leading-relaxed'>Interest Rate</h3>
-          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the interest rate</div>
           <input type="number" value={interest} placeholder="% 5.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
               setInterest(e.target.value)
@@ -144,7 +162,7 @@ export default  function Home() {
 
         <div className='flex flex-col space-y-4 mb-6'>
           <h3 className='font-bold text-2xl text-black leading-relaxed'>Volatility</h3>
-          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the volatility</div>
           <input type="number" value={volatility} placeholder="% 3.00" className="px-4 py-5 h-[58px] placeholder:text-zinc-500 rounded-lg border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
               setVolatility(e.target.value)
@@ -155,7 +173,7 @@ export default  function Home() {
 
         <div className='flex flex-col space-y-4 mb-6'>
           <h3 className='font-bold text-2xl text-black leading-relaxed'>Maturity</h3>
-          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+          <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the maturity of the option</div>
           <input type="date" value={maturity} className="px-4 py-5 h-[58px] rounded-lg text-zinc-500 border border-stone-300 justify-start number-input items-center" 
             onChange={(e)=>{
               setMaturity(e.target.value)
@@ -167,7 +185,7 @@ export default  function Home() {
           (model === "Binomial" || model === "Trinomial") ? (
             <div className='flex flex-col space-y-4 mb-6'>
               <h3 className='font-bold text-2xl text-black leading-relaxed'>Period Numbers</h3>
-              <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the model used to calculate the option</div>
+              <div className="text-neutral-800 text-base font-light leading-[17.52px]">Choose the desired period numbers</div>
               <input
                 type="number"
                 placeholder="10"
@@ -181,8 +199,8 @@ export default  function Home() {
           ) : null
         }
         
-
-        <div className=" flex space-x-6 justify-center items-end grow-[0.90]  "> 
+        <div className="items-center justify-center mb-6 text-black text-3xl font-bold text-left leading-[52.56px]">Price : {price}</div>
+        <div className=" flex space-x-6 justify-center items-end   "> 
           <button className="text-zinc-800 text-base py-5 font-bold  underline leading-[17.52px]"
           onClick={()=>{
             setMaturity(new Date().toISOString().slice(0, 10))
@@ -198,7 +216,6 @@ export default  function Home() {
           onClick={handleSubmit}
           >Calculate</button>
         </div>
-        <div className="items-center justify-center">{price}</div>
       </div>
       
     </main>

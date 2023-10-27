@@ -46,7 +46,7 @@ export default  function Home() {
   const fetchExpiries = async (e) => {
     try {
       setFetching(true)
-      const response = await fetch("http://127.0.0.1:5000/getDates" , {
+      const response = await fetch("https://options-back-end.onrender.com/getDates" , {
         method : "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export default  function Home() {
     try {
       setLoading(true)
       console.log(loading)
-      const response = await fetch("http://127.0.0.1:5000/calculate", {
+      const response = await fetch("https://options-back-end.onrender.com/calculate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

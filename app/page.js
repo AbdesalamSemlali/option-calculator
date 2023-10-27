@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import InputCard from "./components/InputCard";
 import ReactLoading from 'react-loading';
+import GraphPlot from "./components/GraphPlot";
 
 export default  function Home() {
 
@@ -40,11 +41,7 @@ export default  function Home() {
   }
   const models =["Binomial","Trinomial","Black & Scholes"]
 
-  const updateTickers = (string)=> {
-    const filteredArray = TICKERS.values().filter(item => item.includes(string));
-    setTickers(filteredArray)
-  }
-  
+
 
   const fetchExpiries = async (e) => {
     try {
@@ -232,6 +229,7 @@ export default  function Home() {
                   setStrike("")
                   setPeriod("")
                   setTicker("")
+                  setReceit(Array(17).fill(""))
                   setExpiries(null)
                   setPrice(null)
                   setImage(null)
@@ -342,8 +340,10 @@ export default  function Home() {
                 </div>
             </div>
             : null}
+
+
+            { receit[7]=="Black & Scholes" ? <GraphPlot receit={receit}/> : null }
     
-            
           </div>
 
 

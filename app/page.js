@@ -30,15 +30,6 @@ export default  function Home() {
   const [fetching, setFetching] = useState(false)
 
 
-  const TICKERS = {
-    "AAPL" : "Apple",
-    "AMZN" : "Amazon",
-    "TSLA" : "TESLA",
-    "Ntfl" : "Netflix",
-    "hdfh" :"Google",
-    "msft" :" Microsoft",
-    "Ko" : "Coca"
-  }
   const models =["Binomial","Trinomial","Black & Scholes"]
 
 
@@ -82,7 +73,7 @@ export default  function Home() {
     e.preventDefault();
     try {
       setLoading(true)
-      console.log(loading)
+
       const response = await fetch("https://options-back-end.onrender.com/calculate", {
         method: "POST",
         headers: {
@@ -272,32 +263,32 @@ export default  function Home() {
                           </div>
                     }
                     { receit[7] == "Black & Scholes" ?
-                      <>
+                      <div className="flex flex-col space-y-0.5">
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-xl font-bold grow  leading-relaxed">Delta :</p>
-                              <p className="text-neutral-500 text-xl font-bold leading-[43.80px]"> {receit[12]}</p>
+                              <p className="text-black text-base font-bold grow  leading-relaxed">Delta :</p>
+                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[12]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-xl font-bold grow  leading-relaxed">Gamma :</p>
-                              <p className="text-neutral-500 text-xl font-bold leading-[43.80px]"> {receit[13]}</p>
+                              <p className="text-black text-base font-bold grow  leading-relaxed">Gamma :</p>
+                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[13]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-xl font-bold grow  leading-relaxed">Vega :</p>
-                              <p className="text-neutral-500 text-xl font-bold leading-[43.80px]"> {receit[14]}</p>
+                              <p className="text-black text-base font-bold grow  leading-relaxed">Vega :</p>
+                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[14]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-xl font-bold grow  leading-relaxed">Rho :</p>
-                              <p className="text-neutral-500 text-xl font-bold leading-[43.80px]"> {receit[15]}</p>
+                              <p className="text-black text-base font-bold grow  leading-relaxed">Rho :</p>
+                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[15]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-xl font-bold grow  leading-relaxed">Theta :</p>
-                              <p className="text-neutral-500 text-xl font-bold leading-[43.80px]"> {receit[16]}</p>
+                              <p className="text-black text-base font-bold grow  leading-relaxed">Theta :</p>
+                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[16]}</p>
                       </div>
-                      </>
+                      </div>
                       : null
                     }
                   </div>
@@ -305,24 +296,24 @@ export default  function Home() {
                       <div className="flex flex-col space-y-4">
                         <p className="text-black text-base font-medium leading-[17.52px]">Ticker</p>
                         <p className="text-black text-base font-medium leading-[17.52px]">Option Type</p>
+                        <p className="text-black text-base font-medium leading-[17.52px]">Model</p>
                         <p className="text-black text-base font-medium leading-[17.52px]">Stock Price</p>
                         <p className="text-black text-base font-medium leading-[17.52px]">Strike</p>
                         <p className="text-black text-base font-medium leading-[17.52px]">Interest Rate</p>
                         <p className="text-black text-base font-medium leading-[17.52px]">Volatility</p>
                         <p className="text-black text-base font-medium leading-[17.52px]">Maturity</p>
-                        <p className="text-black text-base font-medium leading-[17.52px]">Model</p>
                         {receit[9]=="0" ? null :  <p className="text-black text-base font-medium leading-[17.52px]">Implied Volatility</p>}
                         <p className="text-black text-base font-medium leading-[17.52px]">Dividend Yield</p>
                       </div>
                       <div className="flex flex-col space-y-4">
-                        <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]"> {receit[8]}</p>
+                        <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]"> {receit[8].toUpperCase()}</p>
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]"> {receit[0]+" "+receit[1]}</p>
+                        <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">{receit[7]}</p>
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">$ {receit[2]}</p>
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">$ {receit[3]}</p>
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">% {receit[4]}</p>
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">% {receit[5]}</p>
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">{receit[6]}</p>
-                        <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">{receit[7]}</p>
                         {receit[9]=="0" ? null :<p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">% {(receit[9]*100).toFixed(3)}</p>}
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">% {receit[11]}</p>
                       </div>

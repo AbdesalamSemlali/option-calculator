@@ -15,6 +15,8 @@ const GraphPlot = ({receit}) => {
     const [z,setZ] = useState(null)
     const [xmin,setXmin] = useState("")
     const [xmax,setXmax] = useState("")
+    const [ymin,setYmin] = useState("")
+    const [ymax,setYmax] = useState("")
 
 
     const fecthPlot = async() => {
@@ -36,6 +38,8 @@ const GraphPlot = ({receit}) => {
           s : receit[5]/100,
           xmin : xmin ? xmin : 0,
           xmax : xmax ? xmax : 100,
+          ymin : ymin ? ymin : 0,
+          ymax : ymax ? ymax : 100,
         })
       })
       const data = await response.json();
@@ -48,7 +52,7 @@ const GraphPlot = ({receit}) => {
         y: y,
         z: z,
         masterGraph: {
-          title: `${yValue} variation in terms of ${xValue}`,
+          title: zValue=="None" ? `${yValue} variation in terms of ${xValue}` : `${zValue} variation in terms of ${xValue} and ${yValue}`,
           xAxis: xValue,
           yAxis: yValue,
           zAxis : zValue
@@ -74,7 +78,7 @@ const GraphPlot = ({receit}) => {
                 </button> 
             </div>
             
-            <div className='flex space-x-8 w-full'>
+            <div className='flex space-x-4 w-full'>
                 <input  value={xmin}  placeholder={"xmin"} className="px-4 py-5 h-10 w-1/4 placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center"
                     onChange={(e)=> {
                         setXmin(e.target.value)
@@ -85,6 +89,22 @@ const GraphPlot = ({receit}) => {
                         setXmax(e.target.value)
                     }}
                 /> 
+                {
+                  zValue != "None" ? 
+                  <>
+                  <input  value={ymin}  placeholder={"ymin"} className="px-4 py-5 h-10 w-1/4 placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center"
+                    onChange={(e)=> {
+                        setYmin(e.target.value)
+                    }}
+                /> 
+                <input  value={ymax}  placeholder={"ymax"} className="px-4 py-5 h-10 w-1/4 placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center"
+                    onChange={(e)=> {
+                        setYmax(e.target.value)
+                    }}
+                />
+                </>
+                : null
+                }
             </div>
             
         </div>

@@ -35,7 +35,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
         <Plot
           data={[
             {
-              type: "mesh3d",
+              type: "surface",
               x: graphData.x,             
               y: graphData.y,
               z: graphData.z

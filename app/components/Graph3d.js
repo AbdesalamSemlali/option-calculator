@@ -1,5 +1,8 @@
 import React from 'react'
-import Plot from "react-plotly.js"
+import dynamic from 'next/dynamic'
+const Plot = dynamic(() => import("react-plotly.js"), {
+  ssr: false
+})
 {/*const graphData = {
     z: [
       [8.83, 8.89, 8.81, 8.87, 8.9, 8.87],

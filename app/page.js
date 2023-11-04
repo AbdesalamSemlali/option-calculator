@@ -3,6 +3,7 @@ import { useState} from "react";
 import InputCard from "./components/InputCard";
 import ReactLoading from 'react-loading';
 import GraphPlot from "./components/GraphPlot";
+import Footer from "./components/Footer";
 
 export default  function Home() {
 
@@ -128,7 +129,7 @@ export default  function Home() {
           <div className='flex h-10'>
             <div className={`w-1/2 rounded-l-lg px-6 py-2 ${optionType === "European" ? "bg-zinc-800 shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"} flex justify-start items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
             onClick={(e)=>{
-                setOptionType(e.target.innerText)
+                setOptionType("European")
             }}
             >
               <img src="/eu.png" alt="euro" />
@@ -136,7 +137,7 @@ export default  function Home() {
             </div>
             <div className={`w-1/2 rounded-r-lg px-6 py-2 ${optionType === "American" ? "bg-zinc-800 shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"}  flex justify-start items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
             onClick={(e)=>{
-                setOptionType(e.target.innerText)
+                setOptionType("American")
                 setModel("Binomial")
             }}
             >
@@ -147,7 +148,7 @@ export default  function Home() {
           <div className='flex h-10 '>
             <div className={`w-1/2 rounded-l-lg px-6 py-2 ${option === "Call" ? "bg-zinc-800  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"} flex justify-start items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
             onClick={(e)=>{
-                setOption(e.target.innerText)
+                setOption("Call")
             }}
             > 
               <img  className="rotate-180" src="/put.png" alt="call" />
@@ -155,7 +156,7 @@ export default  function Home() {
             </div>
             <div className={`w-1/2 rounded-r-lg px-6 py-2 ${option === "Put" ? "bg-zinc-800  shadow-inner font-medium text-white" : "border border-stone-300 font-light text-black"}  flex justify-start items-center gap-2  text-base  leading-[17.52px] cursor-pointer`}
             onClick={(e)=>{
-                setOption(e.target.innerText)
+                setOption("Put")
             }}
             >
               <img src="put.png"  alt="put" />
@@ -164,7 +165,7 @@ export default  function Home() {
           </div>
         </div>
 
-        <InputCard  cardState={ticker} setCardState={setTicker} title={"Ticker"} text={"Type the stock name to get the Maturity dates and Implied Volatility, example : AAPL"} placeholder={"AAPL"} help={1} fetching={fetching} onClick={fetchExpiries} error={tickerError}/>
+        <InputCard  cardState={ticker} setCardState={setTicker} title={"Ticker"} text={"Type the stock name to get the Maturity dates and Implied Volatility, example : AAPL"} placeholder={"AAPL"}  fetching={fetching} onClick={fetchExpiries} error={tickerError}/>
 
         <InputCard cardState={dividend} setCardState={setDividend} title={"Dividend"} text={"Choose the stock's dividend rate, if you want it to be calculated based on your stock's choice put it equals to 0"} placeholder={"% 0.25"} />
 
@@ -172,7 +173,7 @@ export default  function Home() {
 
         <InputCard cardState={strike} setCardState={setStrike} title={"Strike"} text={"Choose the option strike "} placeholder={"$ 135"} />
 
-        <InputCard cardState={maturity} setCardState={setMaturity} title={"Maturity"} text={"choose from the dates given by your stock choice."} placeholder={"DD/MM/YY"} help={1} scroll={1} options={expiries}/>
+        <InputCard cardState={maturity} setCardState={setMaturity} title={"Maturity"} text={"choose from the dates given by your stock choice."} placeholder={"DD/MM/YY"}  scroll={1} options={expiries}/>
         
         <InputCard cardState={interest} setCardState={setInterest} title={"Interest Rate"} text={"Type the interest rate in %"} placeholder={"% 5"} />
 
@@ -187,7 +188,7 @@ export default  function Home() {
 
       <div className="flex flex-col w-[65%]">
 
-          <div className="w-full px-24 py-20"> {/*Container*/}
+          <div className="w-full px-24 py-20 flex-1"> {/*Container*/}
 
             <div className="flex items-center justify-between mb-12">
                 <h1 className="text-black text-[40px] font-bold leading-[43.80px]">Option price calculator</h1>
@@ -248,47 +249,50 @@ export default  function Home() {
             
              : null
           }
-            {price ? 
+            {price ? <>
                 <div className="flex my-10 justify-between gap-2">
                   <div className="flex flex-col space-y-2">
-                      <div className="flex space-x-4 items-center">
-                        <p className="text-black text-2xl font-bold grow  leading-relaxed ">Estimated price :</p>
-                        <p className="text-neutral-500 text-3xl font-bold leading-[43.80px]">$ {price}</p>
-                      </div>
+                    <div className="flex flex-col space-y-2">
+                        <div className="flex space-x-4 items-center">
+                          <p className="text-black text-2xl font-bold grow  leading-relaxed ">Estimated price :</p>
+                          <p className="text-neutral-500 text-3xl font-bold leading-[43.80px]">$ {price}</p>
+                        </div>
                     
-                    {receit[10] =="0" ? null : 
+                        {receit[10] =="0" ? null : 
                           <div className="flex space-x-4 items-center">
                               <p className="text-black text-2xl font-bold grow  leading-relaxed">Real price :</p>
                               <p className="text-neutral-500 text-3xl font-bold leading-[43.80px]">$ {(receit[10]).toFixed(3)}</p> 
                           </div>
-                    }
+                        }
+                    </div>
+                      
                     { receit[7] == "Black & Scholes" ?
-                      <div className="flex flex-col space-y-0.5">
+                    <div className="flex flex-col space-y-2">
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-base font-bold grow  leading-relaxed">Delta :</p>
-                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[12]}</p>
+                              <p className="text-black text-base font-medium grow  leading-relaxed">Delta :</p>
+                              <p className="text-neutral-500 text-base font-medium leading-[17.52px]"> {receit[12]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-base font-bold grow  leading-relaxed">Gamma :</p>
-                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[13]}</p>
+                              <p className="text-black text-base font-medium grow  leading-relaxed">Gamma :</p>
+                              <p className="text-neutral-500 text-base font-medium leading-[17.52px]"> {receit[13]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-base font-bold grow  leading-relaxed">Vega :</p>
-                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[14]}</p>
+                              <p className="text-black text-base font-medium grow  leading-relaxed">Vega :</p>
+                              <p className="text-neutral-500 text-base font-medium leading-[17.52px]"> {receit[14]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-base font-bold grow  leading-relaxed">Rho :</p>
-                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[15]}</p>
+                              <p className="text-black text-base font-medium grow  leading-relaxed">Rho :</p>
+                              <p className="text-neutral-500 text-base font-medium leading-[17.52px]"> {receit[15]}</p>
                       </div>
 
                       <div className="flex space-x-4 items-center">
-                              <p className="text-black text-base font-bold grow  leading-relaxed">Theta :</p>
-                              <p className="text-neutral-500 text-base font-bold leading-[43.80px]"> {receit[16]}</p>
+                              <p className="text-black text-base font-medium grow  leading-relaxed">Theta :</p>
+                              <p className="text-neutral-500 text-base font-medium leading-[17.52px]"> {receit[16]}</p>
                       </div>
-                      </div>
+                    </div>
                       : null
                     }
                   </div>
@@ -318,11 +322,12 @@ export default  function Home() {
                         <p className="self-start text-neutral-600 text-base font-light leading-[17.52px]">% {receit[11]}</p>
                       </div>
                 </div>
-              </div> 
+              </div>
+              <div className="border-b-2 w-full  bg-neutral-300 "></div> </> 
               : null
             }
 
-            <div className="border-b-2 w-full  bg-neutral-300 "></div>
+            
             { image ?
             <div className="flex flex-col space-y-2 my-8 items-center justify-center">
                 <div className="text-black text-3xl font-bold  leading-relaxed">{receit[7]} Tree Plot</div>
@@ -337,7 +342,7 @@ export default  function Home() {
     
           </div>
 
-
+          <Footer/>
           
       </div>
         

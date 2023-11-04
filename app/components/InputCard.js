@@ -13,7 +13,7 @@ const InputCard = ({title,text,placeholder,cardState,setCardState,help,scroll,in
         </div>
 
          {/* Text */} 
-        <div className={`${grey == true ? "text-stone-300" : "text-neutral-800"} text-base font-light leading-[17.52px]`}>{text}</div>
+        <div className={`${grey == true ? "text-stone-300" : "text-neutral-800"} text-base font-light leading-5`}>{text}</div>
 
         {/* Input */} 
         <div>
@@ -26,7 +26,7 @@ const InputCard = ({title,text,placeholder,cardState,setCardState,help,scroll,in
                 : null
             }
             <div className='flex justify-between items-center relative'>
-                <input  type={inputType} value={cardState}  placeholder={placeholder} className="px-4 py-5 h-10 grow placeholder:text-zinc-500  rounded-lg border border-stone-300 justify-start number-input items-center"
+                <input  type={inputType} value={cardState}  placeholder={placeholder} className={`px-4 py-5 h-10 grow  ${grey == true ? "placeholder:text-stone-300" : "placeholder:text-zinc-400"}  rounded-lg border border-stone-300 justify-start number-input items-center`}
                     
                     onChange={(e)=>{
                     setCardState(e.target.value)

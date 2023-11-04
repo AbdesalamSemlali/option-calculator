@@ -2,6 +2,7 @@ import React from 'react'
 import Graph2d from './Graph2d'
 import Graph3d from './Graph3d'
 import GraphInput from './GraphInput'
+import ReactLoading from 'react-loading';
 import { useState } from 'react'
 const GraphPlot = ({receit}) => {
     const [xValue,setXvalue] = useState("Stock Price")
@@ -17,9 +18,10 @@ const GraphPlot = ({receit}) => {
     const [xmax,setXmax] = useState("")
     const [ymin,setYmin] = useState("")
     const [ymax,setYmax] = useState("")
-
+    const [loading, setLoading] = useState(false)
 
     const fecthPlot = async() => {
+        setLoading(true)
         const response = await fetch("https://options-back-end.onrender.com/getPlot" , {
         method : "POST",
         headers: {
@@ -43,6 +45,7 @@ const GraphPlot = ({receit}) => {
         })
       })
       const data = await response.json();
+      setLoading(false)
       setX(data.x)
       setY(data.y)
       setZ(data.z)
@@ -68,14 +71,15 @@ const GraphPlot = ({receit}) => {
         }
         
         <div className='flex flex-col space-y-2 w-full'>
-            <div className='flex space-x-4 w-full'>
+            <div className='flex space-x-4 w-full relative'>
                 <GraphInput type={"X :"} setInputValue={setXvalue} inputValue={xValue} inputs={xInput} setInput={setXInput}/>
                 <GraphInput type={"Y :"} inputValue={yValue} setInputValue={setYvalue} inputs={(zValue=="None")? yInput : xInput } setInput={(zValue=="None")? setYInput : setXInput}/>
                 <GraphInput type={"Z :"} inputValue={zValue} setInputValue={setZvalue} inputs={zInput} setInput={setZInput} yValue={yValue} setYvalue={setYvalue} xInput={xInput} setXInput={setXInput} yInput={yInput} setYInput={setYInput} zValue={zValue}/>
                 <button className=" h-10 flex px-4 py-5 bg-black text-white rounded-lg justify-center items-center border border-black hover:scale-95 transition-all duration-100 ease-in-out"
                 onClick={fecthPlot}
                 > Plot
-                </button> 
+                </button>
+                {loading ? <ReactLoading className='absolute top-2 -right-8' type={"spin"} color={"neutral-600"} height={25} width={25} /> : null }
             </div>
             
             <div className='flex space-x-4 w-full'>

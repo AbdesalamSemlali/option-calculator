@@ -120,7 +120,6 @@ export default  function Home() {
   return (
 
     <main className='flex'>
-
       <div className='flex flex-col py-20 px-10 w-[35%] space-y-8 h-screen overflow-y-scroll sticky top-0'>
 
         <div className='flex flex-col space-y-4'>
@@ -249,7 +248,7 @@ export default  function Home() {
             
              : null
           }
-            {price ? <>
+            {price != null ? <>
                 <div className="flex my-10 justify-between gap-2">
                   <div className="flex flex-col space-y-2">
                     <div className="flex flex-col space-y-2">
@@ -260,7 +259,7 @@ export default  function Home() {
                     
                         {receit[10] =="0" ? null : 
                           <div className="flex space-x-4 items-center">
-                              <p className="text-black text-2xl font-bold grow  leading-relaxed">Real price :</p>
+                              <p className="text-black text-2xl font-bold grow  leading-relaxed">Last price :</p>
                               <p className="text-neutral-500 text-3xl font-bold leading-[43.80px]">$ {(receit[10]).toFixed(3)}</p> 
                           </div>
                         }

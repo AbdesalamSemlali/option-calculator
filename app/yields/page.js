@@ -1,11 +1,11 @@
 "use client" ; 
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import YieldGraph from '../components/YieldGraph'
 import InputCard from '../components/InputCard';
 import ReactLoading from 'react-loading';
 import countryList from 'react-select-country-list'
 
-const page = () => {
+const Yield = () => {
   
   const [type,setType] = useState("Interpolation")
   const [model,setModel] = useState("Nelson-Siegel")
@@ -166,4 +166,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Yield
